@@ -19,11 +19,6 @@ resource "google_project_service" "my_project_api" {
 
   disable_dependent_services = true
 }
-/* provider "google" {
-  project = "${google_project.my_project.project_id}"
-  region  = "us-central1"
-  zone    = "us-central1-a"
-} */
 resource "google_compute_instance" "default" {
   project      = "${google_project.my_project.project_id}"
   name         = "terraform"
