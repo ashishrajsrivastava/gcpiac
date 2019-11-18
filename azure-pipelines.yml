@@ -12,7 +12,8 @@ stages:
     jobs:
       - job: planingtf
         pool:
-          vmImage:'windows-latest'
+          name: 'Azure Pipelines'
+          vmImage:  'windows-latest'
         steps:
           - task: TerraformInstaller@0
             inputs:
