@@ -41,6 +41,13 @@ stages:
           name: 'Azure Pipelines'
           vmImage:  'windows-latest'
         steps:
+          - task: TerraformInstaller@0
+            inputs:
+              terraformVersion: '0.12.6'
+          - task: TerraformCLI@0
+            displayName: 'Initializing Terraform'
+            inputs:
+              command: 'init'
           - task: PowerShell@2
             env:
               GOOGLE_CREDENTIALS: $(google_credentials)
