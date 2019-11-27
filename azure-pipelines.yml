@@ -17,4 +17,19 @@ stages:
         steps:
           - task: TerraformInstaller@0
             inputs:
-              terraformVersion: '0.12.2'
+              terraformVersion: '0.12.6'
+          - task: TerraformCLI@0
+            displayName: 'Initializing Terraform'
+            inputs:
+              command: 'init'
+          - task: PowerShell@2
+            displayName: 'Terraform Plan'
+            env:
+              GOOGLE_CREDENTIALS: $(google_credentials)
+              BILLING_AC_ID: $(billing_ac_id)
+            inputs:
+              targetType: 'inline'
+              script: |
+                # terraform plan.
+                
+                terraform plan -var project_id=$env:project_id -var project_name=$env:project_name -var billing_ac_id=$env:billing_ac_id
