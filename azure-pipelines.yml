@@ -46,9 +46,12 @@ stages:
         steps:
           - task: TerraformInstaller@0
             inputs:
-              terraformVersion: '0.12.6'
+              terraformVersion: '0.12.16'
           - task: TerraformCLI@0
             displayName: 'Initializing Terraform'
+            env:
+              GOOGLE_CREDENTIALS: $(google_credentials)
+              BILLING_AC_ID: $(billing_ac_id)
             inputs:
               command: 'init'
           - task: PowerShell@2
