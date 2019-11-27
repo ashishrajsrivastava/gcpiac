@@ -49,4 +49,4 @@ stages:
               targetType: 'inline'
               script: |
                 # terraform apply
-                terraform plan -var project_id=$env:project_id -var billing_ac_id=$env:billing_ac_id
+                terraform apply -var project_id=$env:project_id -var billing_ac_id=$env:billing_ac_id
