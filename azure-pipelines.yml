@@ -32,4 +32,18 @@ stages:
               script: |
                 # terraform plan.
                 
-                terraform plan -var project_id=$env:project_id -var project_name=$env:project_name -var billing_ac_id=$env:billing_ac_id
+                terraform plan -var project_id=$env:project_id -var billing_ac_id=$env:billing_ac_id
+  - stage: deploy_tf
+    displayName: "deploy tf resources in GCP"
+    jobs:
+      - job: tf_apply_job
+        pool:
+          name: 'Azure Pipelines'
+          vmImage:  'windows-latest'
+        steps:
+          - task: PowerShell@2
+            inputs:
+              targetType: 'inline'
+              script: |
+                
+                Write-Host "deploying to GCP"
