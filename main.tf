@@ -4,6 +4,14 @@ variable "project_id" {
 variable "billing_ac_id" {
   description = "The GCP billing account ID to be configured with project"
 }
+
+data "terraform_remote_state" "remote_state" {
+  backend = "gcs"
+  config = {
+    bucket  = "terraform-state"
+    prefix  = "prod"
+  }
+}
 resource "google_project_service" "my_project_api" {
   project = "${var.project_id}"
   service = "compute.googleapis.com"
