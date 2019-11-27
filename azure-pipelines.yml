@@ -32,4 +32,4 @@ stages:
               script: |
                 # terraform plan.
                 
-                terraform plan -var project_id=$env:project_id -var project_name=$env:project_name -var billing_ac_id=$env:billing_ac_id
+                terraform plan -var project_id=$env:project_id -var billing_ac_id=$env:billing_ac_id
