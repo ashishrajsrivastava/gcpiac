@@ -15,23 +15,15 @@ stages:
           name: 'Azure Pipelines'
           vmImage:  'windows-latest'
         steps:
-          - task: PowerShell@2
-            env:
-              GOOGLE_CREDENTIALS: $(google_credentials)
-              BILLING_AC_ID: $(billing_ac_id)
-            inputs:
-              targetType: 'inline'
-              script: |
-                #list all env variables
-                
-                Get-ChildItem env:
           - task: TerraformInstaller@0
             inputs:
               terraformVersion: '0.12.6'
           - task: TerraformCLI@0
+            displayName: 'Initializing Terraform'
             inputs:
               command: 'init'
           - task: PowerShell@2
+            displayName: 'Terraform Plan'
             env:
               GOOGLE_CREDENTIALS: $(google_credentials)
               BILLING_AC_ID: $(billing_ac_id)
