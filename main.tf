@@ -8,7 +8,7 @@ variable "billing_ac_id" {
 data "terraform_remote_state" "remote_state" {
   backend = "gcs"
   config = {
-    bucket  = "terraform-state"
+    bucket  = "texplorerbucket"
     prefix  = "prod"
   }
 }
