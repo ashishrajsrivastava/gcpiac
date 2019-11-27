@@ -32,6 +32,9 @@ stages:
             inputs:
               command: 'init'
           - task: PowerShell@2
+            env:
+              GOOGLE_CREDENTIALS: $(google_credentials)
+              BILLING_AC_ID: $(billing_ac_id)
             inputs:
               targetType: 'inline'
               script: |
