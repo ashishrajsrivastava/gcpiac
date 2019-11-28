@@ -36,31 +36,30 @@ stages:
                 # terraform plan.
                 
                 terraform plan -var project_id=$env:project_id -var billing_ac_id=$env:billing_ac_id
-      - deployment: 'applying_tf'
-        environment: GCP_Demo
+  - stage: deploy_tf'
+    displayName: "deploy tf resources in GCP"
+    jobs:
+      - job: tf_apply_job
         pool:
           name: 'Azure Pipelines'
           vmImage:  'windows-latest'
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-              - task: TerraformInstaller@0
-                inputs:
-                  terraformVersion: '0.12.16'
-              - task: TerraformCLI@0
-                displayName: 'Initializing Terraform'
-                env:
-                  GOOGLE_CREDENTIALS: $(google_credentials)
-                  BILLING_AC_ID: $(billing_ac_id)
-                inputs:
-                  command: 'init'
-              - task: PowerShell@2
-                env:
-                  GOOGLE_CREDENTIALS: $(google_credentials)
-                  BILLING_AC_ID: $(billing_ac_id)
-                inputs:
-                  targetType: 'inline'
-                  script: |
-                    # terraform apply
-                    terraform apply -var project_id=$env:project_id -var billing_ac_id=$env:billing_ac_id -auto-approve
+        steps:
+          - task: TerraformInstaller@0
+            inputs:
+              terraformVersion: '0.12.16'
+          - task: TerraformCLI@0
+            displayName: 'Initializing Terraform'
+            env:
+              GOOGLE_CREDENTIALS: $(google_credentials)
+              BILLING_AC_ID: $(billing_ac_id)
+            inputs:
+              command: 'init'
+          - task: PowerShell@2
+            env:
+              GOOGLE_CREDENTIALS: $(google_credentials)
+              BILLING_AC_ID: $(billing_ac_id)
+            inputs:
+              targetType: 'inline'
+              script: |
+                # terraform apply
+                terraform apply -var project_id=$env:project_id -var billing_ac_id=$env:billing_ac_id -auto-approve
