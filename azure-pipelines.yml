@@ -38,7 +38,7 @@ stages:
                 terraform plan -var project_id=$env:project_id -var billing_ac_id=$env:billing_ac_id
           - task: PublishBuildArtifacts@1
             inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              PathtoPublish: '$(Build.SourcesDirectory)'
               ArtifactName: 'drop'
               publishLocation: 'Container'
   - stage: 'deploy_tf'
