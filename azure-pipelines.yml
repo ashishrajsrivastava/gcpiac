@@ -64,7 +64,7 @@ stages:
                 script: |
                   # Write your PowerShell commands here.
                   
-                  Get-ChildItem $Build.ArtifactStagingDirectory
+                  Get-ChildItem $(System.ArtifactsDirectory)
             - task: PowerShell@2
               enabled: False
               env:
