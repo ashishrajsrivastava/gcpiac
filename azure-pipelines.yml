@@ -59,6 +59,14 @@ stages:
               inputs:
                 command: 'init'
             - task: PowerShell@2
+              inputs:
+                targetType: 'inline'
+                script: |
+                  # Write your PowerShell commands here.
+                  
+                  Get-ChildItem $Build.ArtifactStagingDirectory
+            - task: PowerShell@2
+              enabled: False
               env:
                 GOOGLE_CREDENTIALS: $(google_credentials)
                 BILLING_AC_ID: $(billing_ac_id)
